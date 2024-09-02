@@ -12,12 +12,12 @@ const Login = () => {
   Axios.defaults.withCredentials = true;
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.post("http://localhost:3000/auth/login", {
+    Axios.post("http://localhost:5000/auth/login", {
       email,
       password,
     }).then(response => {
         if(response.data.status) {
-            navigate('/')
+            navigate('/home')
         }
     }).catch(err => {
         console.log(err)
