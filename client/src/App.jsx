@@ -3,6 +3,7 @@ import Signup from './components/Signup'
 import Login from './components/Login'
 import Home from './components/Home'
 import './App.css'
+import Dashboard from './components/Dashboard'
 import ResetPassword from './components/ResetPassword'
 import ForgotPassword from './components/ForgotPassword'
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/forgotpassword' element={<ForgotPassword/>}></Route>
           <Route path='/resetPassword/:token' element={<ResetPassword/>}></Route>
+          <Route path='/dashboard' element={<Dashboard/>}></Route>
           </Routes>
       </BrowserRouter>
     </>

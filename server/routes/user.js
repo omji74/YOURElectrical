@@ -5,6 +5,7 @@ import User from '../models/User.js'
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
 
+
 router.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -102,17 +103,45 @@ router.post('/reset-password/:token',async(req,res)=>{
     const token =  req.params.token;
     const {password} = req.body
     try{
-        console.log("Hii");
+        // console.log("Hii");
         const decoded =await jwt.verify(token,process.env.KEY);
         const id  = decoded.id;
         const hashPassword = await bcrypt.hash(password,10);
         await User.findByIdAndUpdate({_id:id},{password:hashPassword});
-        console.log("hii form line non 110")
+        // console.log("hii form line non 110")
         return res.json({status:true,message:"updated password"})
     }
     catch(err){
-        console.log("hii from backend error")
+        // console.log("hii from backend error")
         return res.json({message:"having some error "})
     }
 })
+
+const verifyUser = async (req, res, next) => {
+    try {
+      const token = req.cookies.token;
+      if (!token) {
+        return res.json({ status: false, message: "no token" });
+      }
+      const decoded = await jwt.verify(token, process.env.KEY);
+      next()
+  
+    } catch (err) {
+      return res.json(err);
+    }
+  };
+  
+
+
+router.get("/verify",verifyUser, (req, res) => {
+    return res.json({status: true, message: "authorized"})
+});
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    console.log("Not suceesse")
+    return res.json({status: true})
+})
+
+
 export {router  as UserRouter};
