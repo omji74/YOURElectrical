@@ -1,18 +1,3 @@
-// import React from 'react'
-// import {Link} from 'react-router-dom'
-
-// const Home = () => {
-//   return (
-//     <div>
-//       HOME
-//      <button><Link to="/dashboard">Dashboard</Link></button>
-//      <br  /> <br />
-//      <button>Logout</button>
-//     </div>
-//   )
-// }
-
-// export default Home
 import axios from 'axios'
 import React from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
